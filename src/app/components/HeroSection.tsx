@@ -1,17 +1,8 @@
 "use client"
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link';
-import React from 'react'
 
 export default function HeroSection() {
-     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-          e.preventDefault();
-          const element = document.querySelector(href);
-          if (element) {
-               element.scrollIntoView({ behavior: 'smooth' });
-          }
-     };
-
      return (
           <section id="home" className="pt-32 pb-20 gradient-orange min-h-screen flex items-center relative overflow-hidden">
                <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -36,14 +27,12 @@ export default function HeroSection() {
                               <div className="flex flex-col sm:flex-row gap-4 relative z-30">
                                    <Link
                                         href="#portfolio"
-                                        onClick={(e) => handleLinkClick(e, '#portfolio')}
                                         className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition shadow-lg text-center flex items-center justify-center gap-2 cursor-pointer active:scale-95 transform duration-150 touch-manipulation"
                                    >
                                         Lihat Projek <ArrowRight size={20} />
                                    </Link>
                                    <Link
                                         href="#contact"
-                                        onClick={(e) => handleLinkClick(e, '#contact')}
                                         className="px-8 py-3 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 active:bg-white/20 transition text-center cursor-pointer active:scale-95 transform duration-150 touch-manipulation"
                                    >
                                         Konsultasi Gratis
