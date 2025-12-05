@@ -31,22 +31,34 @@ export default function HeroSection() {
                               <p className="text-lg text-white/90 mb-8 max-w-lg">
                                    Kami membantu UMKM dan perusahaan bertransformasi digital dengan website yang cepat, aman, dan memikat pelanggan.
                               </p>
-
-                              <div className="flex flex-col sm:flex-row gap-4 relative z-30">
-                                   <a
-                                        href="#portfolio"
-                                        onClick={(e) => handleLinkClick(e, '#portfolio')}
-                                        className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition shadow-lg text-center flex items-center justify-center gap-2 cursor-pointer active:scale-95 transform duration-150 touch-manipulation"
+                              
+                              <div className="flex flex-col sm:flex-row gap-4 relative z-[50] pointer-events-auto">
+                                   <button
+                                        onClick={(e) => {
+                                             e.preventDefault();
+                                             const element = document.querySelector('#portfolio');
+                                             if (element) {
+                                                  element.scrollIntoView({ behavior: 'smooth' });
+                                             }
+                                        }}
+                                        type="button"
+                                        className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition shadow-lg text-center flex items-center justify-center gap-2 cursor-pointer active:scale-95 transform duration-150 touch-manipulation pointer-events-auto"
                                    >
                                         Lihat Projek <ArrowRight size={20} />
-                                   </a>
-                                   <a
-                                        href="#contact"
-                                        onClick={(e) => handleLinkClick(e, '#contact')}
-                                        className="px-8 py-3 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 active:bg-white/20 transition text-center cursor-pointer active:scale-95 transform duration-150 touch-manipulation"
+                                   </button>
+                                   <button
+                                        onClick={(e) => {
+                                             e.preventDefault();
+                                             const element = document.querySelector('#contact');
+                                             if (element) {
+                                                  element.scrollIntoView({ behavior: 'smooth' });
+                                             }
+                                        }}
+                                        type="button"
+                                        className="px-8 py-3 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 active:bg-white/20 transition text-center cursor-pointer active:scale-95 transform duration-150 touch-manipulation pointer-events-auto"
                                    >
                                         Konsultasi Gratis
-                                   </a>
+                                   </button>
                               </div>
                          </div>
 
