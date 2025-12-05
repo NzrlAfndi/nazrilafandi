@@ -29,22 +29,25 @@ export default function HeroSection() {
                               <div className="flex flex-col sm:flex-row gap-4 relative z-40">
                                    <Link
                                         href="#portfolio"
-                                        className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition shadow-lg text-center flex items-center justify-center gap-2 cursor-pointer active:scale-95 duration-150"
+                                        className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 active:bg-gray-200 transition shadow-lg text-center flex items-center justify-center gap-2 cursor-pointer active:scale-95 duration-150 pointer-events-auto"
                                    >
                                         Lihat Projek <ArrowRight size={20} />
                                    </Link>
 
                                    <Link
                                         href="#contact"
-                                        className="px-8 py-3 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 active:bg-white/20 transition text-center cursor-pointer active:scale-95 duration-150"
+                                        className="px-8 py-3 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 active:bg-white/20 transition text-center cursor-pointer active:scale-95 duration-150 pointer-events-auto"
                                    >
                                         Konsultasi Gratis
                                    </Link>
                               </div>
                          </div>
 
-                         <div className="md:w-1/2 flex justify-center animate-float pointer-events-none select-none relative z-10">
-                              <svg className="w-full max-w-md h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <div className="md:w-1/2 flex justify-center select-none absolute bottom-0 right-0 w-full md:static -z-10">
+                              <svg className="w-full max-w-md h-auto"
+                                   viewBox="0 0 400 300"
+                                   fill="none"
+                                   xmlns="http://www.w3.org/2000/svg">
                                    <rect x="50" y="50" width="300" height="200" rx="10" fill="white" fillOpacity="0.9" />
                                    <rect x="50" y="50" width="300" height="30" rx="10" fill="#fbbf24" />
                                    <circle cx="70" cy="65" r="5" fill="white" />
