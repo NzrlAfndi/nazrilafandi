@@ -38,6 +38,15 @@ export default function Navbar() {
           return () => window.removeEventListener('scroll', handleScroll);
      }, []);
 
+     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+          e.preventDefault();
+          setIsMenuOpen(false);
+          const element = document.querySelector(href);
+          if (element) {
+               element.scrollIntoView({ behavior: 'smooth' });
+          }
+     };
+
      return (
           <nav
                className={`
@@ -70,7 +79,8 @@ export default function Navbar() {
                               <a
                                    key={index}
                                    href={link.href}
-                                   className="text-start font-semibold text-gray-600 hover:text-orange-500 transition-colors relative group"
+                                   onClick={(e) => handleLinkClick(e, link.href)}
+                                   className="text-start font-semibold text-gray-600 hover:text-orange-500 transition-colors relative group cursor-pointer"
                               >
                                    {link.label}
                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
@@ -81,17 +91,20 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                          <a
                               href="#contact"
+                              onClick={(e) => handleLinkClick(e, '#contact')}
                               className={`
-                                   hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-start transition-all shadow-lg hover:shadow-orange-500/20 transform hover:-translate-y-0.5
-                                   bg-gradient-to-r from-orange-500 to-amber-600 text-white hover:to-orange-600
+                                   hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-start transition-all shadow-lg hover:shadow-orange-500/20 transform hover:-translate-y-0.5 active:scale-95
+                                   bg-gradient-to-r from-orange-500 to-amber-600 text-white hover:to-orange-600 cursor-pointer
                               `}
                          >
                               Mulai Proyek <ArrowRight size={16} />
                          </a>
 
                          <button
-                              className="md:hidden text-gray-600 hover:text-orange-600 focus:outline-none transition-colors p-2"
+                              className="md:hidden text-gray-600 hover:text-orange-600 focus:outline-none transition-colors p-2 touch-manipulation cursor-pointer"
                               onClick={toggleMenu}
+                              type="button"
+                              aria-label="Toggle menu"
                          >
                               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                          </button>
@@ -120,8 +133,8 @@ export default function Navbar() {
                                    <a 
                                         key={index}
                                         href={link.href} 
-                                        onClick={() => setIsMenuOpen(false)} 
-                                        className="text-gray-700 font-medium hover:text-orange-500 block px-2 py-2 border-b border-gray-50 last:border-0"
+                                        onClick={(e) => handleLinkClick(e, link.href)}
+                                        className="text-gray-700 font-medium hover:text-orange-500 block px-2 py-2 border-b border-gray-50 last:border-0 cursor-pointer touch-manipulation active:bg-gray-50"
                                    >
                                         {link.label}
                                    </a>
@@ -131,8 +144,8 @@ export default function Navbar() {
                               
                               <a 
                                    href="#contact" 
-                                   onClick={() => setIsMenuOpen(false)} 
-                                   className="text-center w-full block py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-bold shadow-lg shadow-orange-500/20 active:scale-95 transition-transform"
+                                   onClick={(e) => handleLinkClick(e, '#contact')}
+                                   className="text-center w-full block py-3 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white rounded-xl font-bold shadow-lg shadow-orange-500/20 active:scale-95 transition-transform cursor-pointer touch-manipulation"
                               >
                                    Mulai Proyek
                               </a>
