@@ -10,9 +10,9 @@ export default function HeroSection() {
                     </svg>
                </div>
 
-               <div className="container mx-auto px-6 relative z-10">
+               <div className="container mx-auto px-6 relative z-20">
                     <div className="flex flex-col md:flex-row items-center justify-between">
-                         <div className="md:w-1/2 mb-10 md:mb-0 animate-fadeInUp">
+                         <div className="md:w-1/2 mb-10 md:mb-0 animate-fadeInUp relative z-30">
                               <span className="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">
                                    🚀 Jasa Pembuatan Website Terpercaya
                               </span>
@@ -22,16 +22,24 @@ export default function HeroSection() {
                               <p className="text-lg text-white/90 mb-8 max-w-lg">
                                    Kami membantu UMKM dan perusahaan bertransformasi digital dengan website yang cepat, aman, dan memikat pelanggan.
                               </p>
-                              <div className="flex flex-col sm:flex-row gap-4">
-                                   <a href="#portfolio" className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 transition shadow-lg text-center flex items-center justify-center gap-2">
+                              
+                              <div className="flex flex-col sm:flex-row gap-4 relative z-30">
+                                   <a 
+                                        href="#portfolio" 
+                                        className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 transition shadow-lg text-center flex items-center justify-center gap-2 cursor-pointer active:scale-95 transform duration-150"
+                                   >
                                         Lihat Projek <ArrowRight size={20} />
                                    </a>
-                                   <a href="#contact" className="px-8 py-3 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 transition text-center">
+                                   <a 
+                                        href="#contact" 
+                                        className="px-8 py-3 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 transition text-center cursor-pointer active:scale-95 transform duration-150"
+                                   >
                                         Konsultasi Gratis
                                    </a>
                               </div>
                          </div>
-                         <div className="md:w-1/2 flex justify-center animate-float">
+
+                         <div className="md:w-1/2 flex justify-center animate-float pointer-events-none select-none">
                               <svg className="w-full max-w-md h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                                    <rect x="50" y="50" width="300" height="200" rx="10" fill="white" fillOpacity="0.9" />
                                    <rect x="50" y="50" width="300" height="30" rx="10" fill="#fbbf24" />

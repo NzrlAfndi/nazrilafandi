@@ -24,7 +24,7 @@ export default function Navbar() {
                          .from('site_settings')
                          .select('app_name')
                          .single();
-                    
+
                     if (data && !error) {
                          setBrandName(data.app_name || 'KodingMulu');
                     }
@@ -41,14 +41,14 @@ export default function Navbar() {
      return (
           <nav
                className={`
-          fixed z-50 left-1/2 -translate-x-1/2
-          transition-all duration-500 ease-in-out
-          flex items-center justify-center
-          ${isScrolled
+                    fixed z-[999] left-0 right-0 mx-auto
+                    transition-all duration-500 ease-in-out
+                    flex items-center justify-center
+                    ${isScrolled
                          ? 'top-0 w-full rounded-none py-4 bg-white/95 backdrop-blur-xl shadow-md border-b border-gray-100'
                          : 'top-6 w-[95%] max-w-7xl rounded-full py-3 bg-white/80 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50'
                     }
-        `}
+               `}
           >
                <div className="w-full max-w-6xl px-6 flex justify-between items-center h-full mx-auto">
                     <div className="flex items-center gap-1 cursor-pointer group">
@@ -82,15 +82,15 @@ export default function Navbar() {
                          <a
                               href="#contact"
                               className={`
-                hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-start transition-all shadow-lg hover:shadow-orange-500/20 transform hover:-translate-y-0.5
-                bg-gradient-to-r from-orange-500 to-amber-600 text-white hover:to-orange-600
-              `}
+                                   hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-start transition-all shadow-lg hover:shadow-orange-500/20 transform hover:-translate-y-0.5
+                                   bg-gradient-to-r from-orange-500 to-amber-600 text-white hover:to-orange-600
+                              `}
                          >
                               Mulai Proyek <ArrowRight size={16} />
                          </a>
 
                          <button
-                              className="md:hidden text-gray-600 hover:text-orange-600 focus:outline-none transition-colors"
+                              className="md:hidden text-gray-600 hover:text-orange-600 focus:outline-none transition-colors p-2"
                               onClick={toggleMenu}
                          >
                               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -99,16 +99,41 @@ export default function Navbar() {
                </div>
 
                {isMenuOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-4 mx-auto w-[95%] max-w-7xl p-6 bg-white rounded-2xl shadow-2xl border border-gray-100 md:hidden animate-fadeInUp">
-                         <div className="flex flex-col space-y-4">
-                              <a href="#home" onClick={() => setIsMenuOpen(false)} className="text-gray-700 font-medium hover:text-orange-500">Beranda</a>
-                              <a href="#tentang" onClick={() => setIsMenuOpen(false)} className="text-gray-700 font-medium hover:text-orange-500">Tentang Kami</a>
-                              <a href="#services" onClick={() => setIsMenuOpen(false)} className="text-gray-700 font-medium hover:text-orange-500">Layanan</a>
-                              <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="text-gray-700 font-medium hover:text-orange-500">Harga</a>
-                              <a href="#portfolio" onClick={() => setIsMenuOpen(false)} className="text-gray-700 font-medium hover:text-orange-500">Portfolio</a>
-                              <a href="#testimoni" onClick={() => setIsMenuOpen(false)} className="text-gray-700 font-medium hover:text-orange-500">Testimoni</a>
-                              <hr className="border-gray-100" />
-                              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-center w-full py-3 bg-orange-500 text-white rounded-xl font-bold shadow-lg shadow-orange-500/20">
+                    <div 
+                         className="
+                              absolute top-full left-0 right-0 mt-4 mx-auto w-[95%] max-w-7xl 
+                              p-6 bg-white rounded-2xl shadow-2xl border border-gray-100 md:hidden 
+                              animate-fadeInUp 
+                              z-[1000] 
+                              max-h-[85vh] overflow-y-auto 
+                         "
+                    >
+                         <div className="flex flex-col space-y-4 pb-2">
+                              {[
+                                   { label: 'Beranda', href: '#home' },
+                                   { label: 'Tentang Kami', href: '#tentang' },
+                                   { label: 'Layanan', href: '#services' },
+                                   { label: 'Harga', href: '#pricing' },
+                                   { label: 'Portfolio', href: '#portfolio' },
+                                   { label: 'Testimoni', href: '#testimoni' },
+                              ].map((link, index) => (
+                                   <a 
+                                        key={index}
+                                        href={link.href} 
+                                        onClick={() => setIsMenuOpen(false)} 
+                                        className="text-gray-700 font-medium hover:text-orange-500 block px-2 py-2 border-b border-gray-50 last:border-0"
+                                   >
+                                        {link.label}
+                                   </a>
+                              ))}
+                              
+                              <hr className="border-gray-100 my-2" />
+                              
+                              <a 
+                                   href="#contact" 
+                                   onClick={() => setIsMenuOpen(false)} 
+                                   className="text-center w-full block py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-bold shadow-lg shadow-orange-500/20 active:scale-95 transition-transform"
+                              >
                                    Mulai Proyek
                               </a>
                          </div>

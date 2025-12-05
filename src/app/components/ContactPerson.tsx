@@ -9,6 +9,16 @@ export default function ContactPerson() {
           email: ''
      });
 
+     const getWhatsAppUrl = (phone: string) => {
+          if (!phone) return '#';
+          let cleanNumber = phone.replace(/\D/g, '');
+          if (cleanNumber.startsWith('0')) {
+               cleanNumber = '62' + cleanNumber.slice(1);
+          }
+
+          return `https://wa.me/${cleanNumber}`;
+     };
+
      useEffect(() => {
           const fetchBranding = async () => {
                try {
@@ -24,12 +34,12 @@ export default function ContactPerson() {
                          });
                     }
                } catch (error) {
-                    console.error("Gagal memuat nama website:", error);
+                    console.error("Gagal memuat kontak:", error);
                }
           };
 
           fetchBranding();
-     })
+     }, []);
 
      return (
           <section id="contact" className="py-20 gradient-orange">
@@ -51,7 +61,12 @@ export default function ContactPerson() {
                               </div>
 
                               <div className="mt-8">
-                                   <a href={`https://wa.me/${branding.phone}`} className="inline-flex items-center justify-center w-full px-4 py-3 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600 transition gap-2">
+                                   <a 
+                                        href={getWhatsAppUrl(branding.phone)}
+                                        target="_blank"
+                                        rel="noopener noreferrer" 
+                                        className="inline-flex items-center justify-center w-full px-4 py-3 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600 transition gap-2 shadow-md hover:shadow-lg transform active:scale-95 duration-150"
+                                   >
                                         <MessageCircle size={20} />
                                         Chat via WhatsApp
                                    </a>
@@ -71,7 +86,7 @@ export default function ContactPerson() {
                                         <label className="block text-sm font-bold text-gray-700 mb-1">Pesan</label>
                                         <textarea rows={4} className="w-full px-4 py-2 border border-gray-300 rounded focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500" placeholder="Ceritakan kebutuhan website Anda..."></textarea>
                                    </div>
-                                   <button type="submit" className="w-full bg-orange-600 text-white py-3 rounded font-bold hover:bg-orange-700 transition shadow-md">Kirim Pesan</button>
+                                   <button type="submit" className="w-full bg-orange-600 text-white py-3 rounded font-bold hover:bg-orange-700 transition shadow-md hover:shadow-lg active:scale-95 transform duration-150">Kirim Pesan</button>
                               </form>
                          </div>
                     </div>

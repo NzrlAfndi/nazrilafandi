@@ -37,7 +37,7 @@ export default function Pricing() {
      }, []);
 
      return (
-          <section id="pricing" className="py-20 bg-orange-50">
+          <section id="pricing" className="py-20 bg-orange-50 relative z-10">
                <div className="container mx-auto px-6">
                     <h2 className="text-3xl font-bold text-center mb-12">Daftar Harga Paket</h2>
                     {isLoading ? (
@@ -54,15 +54,15 @@ export default function Pricing() {
                                         <div
                                              key={pkg.id}
                                              className={`
-                                                  bg-white rounded-xl p-8 border-t-4 transition duration-300
+                                                  relative rounded-xl p-8 border-t-4 transition duration-300 flex flex-col
                                                   ${isPopular
-                                                       ? 'shadow-xl border-orange-500 transform md:scale-105 relative z-10'
-                                                       : 'shadow-lg border-gray-300 hover:scale-105 hover:shadow-xl'
+                                                       ? 'bg-white shadow-xl border-orange-500 transform md:scale-105 z-10'
+                                                       : 'bg-white shadow-lg border-gray-300 hover:scale-105 hover:shadow-xl z-0'
                                                   }
                                              `}
                                         >
                                              {isPopular && (
-                                                  <span className="absolute top-0 right-0 bg-orange-500 text-white text-xs px-3 py-1 rounded-bl-lg font-bold">
+                                                  <span className="absolute top-0 right-0 bg-orange-500 text-white text-xs px-3 py-1 rounded-bl-lg font-bold z-20">
                                                        Terlaris
                                                   </span>
                                              )}
@@ -75,7 +75,7 @@ export default function Pricing() {
                                                   <span className="text-3xl font-bold">{pkg.price}</span>
                                              </div>
 
-                                             <ul className="text-sm space-y-3 text-gray-600 mb-8 min-h-[120px]">
+                                             <ul className="text-sm space-y-3 text-gray-600 mb-8 min-h-[120px] flex-grow relative z-0">
                                                   {featureList.map((feature, idx) => (
                                                        <li key={idx} className="flex gap-2 items-start">
                                                             <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
@@ -87,7 +87,7 @@ export default function Pricing() {
                                              <a
                                                   href="#contact"
                                                   className={`
-                                                       block w-full py-2 text-center rounded-lg transition font-medium
+                                                       block w-full py-2 text-center rounded-lg transition font-medium relative z-20 cursor-pointer
                                                        ${isPopular
                                                             ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white hover:shadow-lg'
                                                             : 'border border-orange-500 text-orange-500 hover:bg-orange-50'
