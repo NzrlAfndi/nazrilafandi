@@ -29,7 +29,6 @@ const LandingPage: React.FC = () => {
       <Testimoni />
       <ContactPerson />
       <Footer />
-      {/* <WhatsAppFloat /> */}
     </div>
   );
 };
