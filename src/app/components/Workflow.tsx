@@ -1,31 +1,36 @@
-import React from 'react'
-
 export default function Workflow() {
-     return (
-          <section className="py-20 bg-orange-50">
-               <div className="container mx-auto px-6">
-                    <h2 className="text-3xl font-bold text-center mb-12">Alur Kerja Kami</h2>
-                    <div className="relative">
-                         <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-orange-200 -translate-y-1/2 z-0"></div>
+  const steps = [
+    { step: 1, title: "Konsultasi", desc: "Diskusi kebutuhan website." },
+    { step: 2, title: "Deal & DP", desc: "Kesepakatan harga & pembayaran." },
+    { step: 3, title: "Pengerjaan", desc: "Desain dan coding dimulai." },
+    { step: 4, title: "Selesai", desc: "Revisi & website siap online.", accent: true },
+  ];
 
-                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
-                              {[
-                                   { step: 1, title: "Konsultasi", desc: "Diskusi kebutuhan website." },
-                                   { step: 2, title: "Deal & DP", desc: "Kesepakatan harga & pembayaran." },
-                                   { step: 3, title: "Pengerjaan", desc: "Desain dan coding dimulai." },
-                                   { step: 4, title: "Selesai", desc: "Revisi & website siap online." },
-                              ].map((item, index) => (
-                                   <div key={index} className="bg-white p-6 rounded-xl shadow-md text-center transform hover:-translate-y-2 transition duration-300">
-                                        <div className={`w-10 h-10 ${index === 3 ? 'bg-green-500' : 'bg-orange-500'} text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg`}>
-                                             {item.step}
-                                        </div>
-                                        <h4 className="font-bold mb-2">{item.title}</h4>
-                                        <p className="text-sm text-gray-500">{item.desc}</p>
-                                   </div>
-                              ))}
-                         </div>
-                    </div>
-               </div>
-          </section>
-     )
+  return (
+    <section className="relative py-24 overflow-hidden">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+        <div className="text-center mb-14">
+          <span className="section-badge mb-3 inline-block">PROSES</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Alur Kerja Kami</h2>
+        </div>
+
+        <div className="relative">
+          {/* Connector line */}
+          <div className="hidden md:block absolute top-8 left-[12.5%] w-3/4 h-0.5 bg-gradient-to-r from-orange-200 via-orange-400 to-green-400 z-0 rounded-full" />
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 relative z-10">
+            {steps.map(({ step, title, desc, accent }) => (
+              <div key={step} className="glass-card p-6 text-center hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_16px_40px_rgba(249,115,22,.18)]">
+                <div className={`w-10 h-10 ${accent ? 'bg-gradient-to-br from-green-400 to-emerald-500' : 'gradient-orange'} text-white rounded-full flex items-center justify-center mx-auto mb-4 font-extrabold text-base shadow-lg`}>
+                  {step}
+                </div>
+                <h4 className="font-extrabold text-gray-900 mb-1.5 text-sm">{title}</h4>
+                <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

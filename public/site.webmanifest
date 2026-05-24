@@ -1,0 +1,16 @@
+{
+  "name": "KodingMulu by Nazril Afandi",
+  "short_name": "KodingMulu",
+  "description": "Jasa pembuatan website profesional untuk UMKM dan perusahaan di Indonesia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff7f0",
+  "theme_color": "#f97316",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

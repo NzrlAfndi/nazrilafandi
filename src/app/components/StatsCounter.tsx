@@ -3,81 +3,49 @@ import { supabase } from '@/lib/supabaseClient';
 import { useEffect, useState } from 'react';
 
 const AnimatedText = ({ text, speed = 100 }: { text: string; speed?: number }) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [index, setIndex] = useState(0);
-
+  const [shown, setShown] = useState("");
+  const [idx, setIdx] = useState(0);
   useEffect(() => {
     if (!text) return;
-
-    const timer = setInterval(() => {
-      setIndex((prevIndex) => {
-        if (prevIndex < text.length) {
-          const nextIndex = prevIndex + 1;
-          setDisplayedText(text.slice(0, nextIndex)); 
-          return nextIndex;
-        } else {
-          clearInterval(timer);
-          return prevIndex;
-        }
+    const t = setInterval(() => {
+      setIdx(p => {
+        if (p < text.length) { setShown(text.slice(0, p+1)); return p+1; }
+        clearInterval(t); return p;
       });
     }, speed);
-
-    return () => clearInterval(timer);
+    return () => clearInterval(t);
   }, [text, speed]);
-
-  return <span>{displayedText}</span>;
+  return <span>{shown}</span>;
 };
 
 export default function StatsCounter() {
-     const [projectsDone, setProjectsDone] = useState('0');
+  const [projects, setProjects] = useState('0');
+  useEffect(() => {
+    supabase.from('site_settings').select('stats_projects').single()
+      .then(({ data }) => { if (data) setProjects(String(data.stats_projects || '0')); });
+  }, []);
 
-     useEffect(() => {
-          const fetchStats = async () => {
-               try {
-                    const { data, error } = await supabase
-                         .from('site_settings')
-                         .select('stats_projects')
-                         .single();
-                    
-                    if (data && !error) {
-                         setProjectsDone(String(data.stats_projects || '0'));
-                    }
-               } catch (error) {
-                    console.error("Gagal memuat nama website:", error);
-               }
-          };
+  const stats = [
+    { value: projects, label: 'Projek Selesai', speed: 150 },
+    { value: '3+', label: 'Tahun Pengalaman', speed: 200 },
+    { value: '24/7', label: 'Layanan Support', speed: 150 },
+    { value: '100%', label: 'Kepuasan Klien', speed: 150 },
+  ];
 
-          fetchStats();
-     }, [])
-
-     return (
-          <section className="py-10 bg-white shadow-md relative z-20 -mt-10 mx-6 rounded-xl max-w-6xl md:mx-auto">
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
-                    <div>
-                         <p className="text-4xl font-bold text-orange-600 min-h-[40px]">
-                              <AnimatedText text={projectsDone} speed={150} />
-                         </p>
-                         <p className="text-gray-500 text-sm mt-1">Projek Selesai</p>
-                    </div>
-                    <div>
-                         <p className="text-4xl font-bold text-orange-600 min-h-[40px]">
-                              <AnimatedText text="3+" speed={200} />
-                         </p>
-                         <p className="text-gray-500 text-sm mt-1">Tahun Pengalaman</p>
-                    </div>
-                    <div>
-                         <p className="text-4xl font-bold text-orange-600 min-h-[40px]">
-                              <AnimatedText text="24/7" speed={150} />
-                         </p>
-                         <p className="text-gray-500 text-sm mt-1">Layanan Support</p>
-                    </div>
-                    <div>
-                         <p className="text-4xl font-bold text-orange-600 min-h-[40px]">
-                              <AnimatedText text="100%" speed={150} />
-                         </p>
-                         <p className="text-gray-500 text-sm mt-1">Kepuasan Klien</p>
-                    </div>
-               </div>
-          </section>
-     )
+  return (
+    <section className="relative z-20 -mt-14 mx-4 md:mx-auto max-w-5xl px-0">
+      <div className="glass-strong rounded-[24px] px-6 py-7">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {stats.map((s, i) => (
+            <div key={i} className={`flex flex-col items-center ${i < 3 ? 'md:border-r md:border-orange-100/60' : ''}`}>
+              <p className="text-4xl font-extrabold text-gradient-orange min-h-[44px]">
+                <AnimatedText text={s.value} speed={s.speed} />
+              </p>
+              <p className="text-gray-400 text-xs mt-1 font-medium">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

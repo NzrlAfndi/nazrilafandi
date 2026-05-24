@@ -4,38 +4,16 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
 export default function Footer() {
-     const [branding, setBranding] = useState({
-          appName: 'KodingMulu',
-          instagram: '@kodingmulu'
-     });
+     const [branding, setBranding] = useState({ appName: 'KodingMulu', instagram: '@kodingmulu' });
 
-     const getInstagramUrl = (username: string) => {
-          if (!username) return '#';
-          const cleanUsername = username.replace('@', '').trim(); 
-          return `https://instagram.com/${cleanUsername}`;
-     };
+  useEffect(() => {
+    supabase.from('site_settings').select('app_name, instagram').single()
+      .then(({ data }) => {
+        if (data) setBranding({ appName: data.app_name || 'KodingMulu', instagram: data.instagram || '@kodingmulu' });
+      });
+  }, []);
 
-     useEffect(() => {
-          const fetchBranding = async () => {
-               try {
-                    const { data, error } = await supabase
-                         .from('site_settings')
-                         .select('app_name, instagram')
-                         .single();
-
-                    if (data && !error) {
-                         setBranding({
-                              appName: data.app_name || 'KodingMulu',
-                              instagram: data.instagram || '@kodingmulu'
-                         });
-                    }
-               } catch (error) {
-                    console.error("Gagal memuat footer:", error);
-               }
-          };
-
-          fetchBranding();
-     }, []);
+  const igUrl = branding.instagram ? `https://instagram.com/${branding.instagram.replace('@','').trim()}` : '#';
 
      return (
           <footer className="bg-gray-900 text-white py-10 relative z-10">
@@ -50,7 +28,7 @@ export default function Footer() {
                          
                          <div className="flex items-center">
                               <a 
-                                   href={getInstagramUrl(branding.instagram)} 
+                                   href={branding.instagram} 
                                    target="_blank" 
                                    rel="noopener noreferrer"
                                    aria-label="Follow us on Instagram"

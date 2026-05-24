@@ -1,43 +1,52 @@
 import { Check, Laptop, LineChart, Palette, Wrench } from 'lucide-react'
-import React from 'react'
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center gap-12">
+    <section id="services" className="relative py-24 overflow-hidden">
+      <div className="absolute inset-0 glass-section pointer-events-none" />
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+        <div className="flex flex-col md:flex-row items-center gap-14">
+
           <div className="md:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Layanan Yang Kami Tawarkan</h2>
-            <p className="text-gray-600 mb-6">Kami menyediakan solusi digital lengkap mulai dari perancangan hingga pemeliharaan.</p>
-            <ul className="space-y-4">
+            <span className="section-badge mb-4 inline-block">LAYANAN</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Layanan Yang Kami Tawarkan</h2>
+            <p className="text-gray-500 mb-8 leading-relaxed">Kami menyediakan solusi digital lengkap mulai dari perancangan hingga pemeliharaan.</p>
+            <ul className="space-y-3">
               {[
                 "Pembuatan Landing Page",
                 "Website Company Profile",
                 "Toko Online (E-Commerce)",
                 "Aplikasi Web Custom (Sistem Informasi)"
-              ].map((item, index) => (
-                <li key={index} className="flex items-center space-x-3">
-                  <Check className="text-orange-500" size={20} />
-                  <span>{item}</span>
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+                    <Check size={13} className="text-orange-600" />
+                  </div>
+                  <span className="text-gray-700 font-medium text-sm">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
+
           <div className="md:w-1/2 grid grid-cols-2 gap-4">
             {[
-              { icon: <Laptop size={32} />, title: "Web Design" },
-              { icon: <Wrench size={32} />, title: "Maintenance" },
-              { icon: <Palette size={32} />, title: "UI/UX" },
-              { icon: <LineChart size={32} />, title: "SEO" },
-            ].map((service, index) => (
-              <div key={index} className="bg-orange-100 p-6 rounded-lg text-center hover:bg-orange-200 transition cursor-default">
-                <div className="flex justify-center text-orange-600 mb-2">{service.icon}</div>
-                <h4 className="font-bold text-gray-800">{service.title}</h4>
+              { icon: Laptop, title: "Web Design", sub: "Tampilan modern & menarik" },
+              { icon: Wrench, title: "Maintenance", sub: "Update & perbaikan rutin" },
+              { icon: Palette, title: "UI/UX", sub: "Desain yang nyaman dipakai" },
+              { icon: LineChart, title: "SEO", sub: "Naik peringkat di Google" },
+            ].map(({ icon: Icon, title, sub }) => (
+              <div key={title} className="glass-card p-6 text-center hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_12px_32px_rgba(249,115,22,.16)]">
+                <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-amber-50 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                  <Icon size={22} className="text-orange-500" />
+                </div>
+                <h4 className="font-extrabold text-gray-900 text-sm">{title}</h4>
+                <p className="text-xs text-gray-400 mt-1">{sub}</p>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
-  )
+  );
 }
